@@ -1,0 +1,16 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 20
+
+arm_controller:
+  type: joint_trajectory_controller/JointTrajectoryController
+  joints:
+    - shoulder_pan
+    - shoulder_lift
+    - elbow_flex
+    - wrist_flex
+    - wrist_roll
+  command_interfaces:
+    - position
+  state_interfaces:
+    - position

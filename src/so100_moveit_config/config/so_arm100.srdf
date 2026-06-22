@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot name="so_arm100">
+  <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="base"/>
+  <group name="arm">
+    <chain base_link="base" tip_link="jaw"/>
+  </group>
+  <group name="gripper">
+    <joint name="gripper"/>
+  </group>
+  <end_effector name="gripper_ee" parent_link="jaw" group="gripper"/>
+  <disable_collisions link1="base" link2="shoulder" reason="adjacent"/>
+  <disable_collisions link1="shoulder" link2="upper_arm" reason="adjacent"/>
+  <disable_collisions link1="upper_arm" link2="lower_arm" reason="adjacent"/>
+  <disable_collisions link1="lower_arm" link2="wrist" reason="adjacent"/>
+  <disable_collisions link1="wrist" link2="gripper" reason="adjacent"/>
+  <disable_collisions link1="gripper" link2="jaw" reason="adjacent"/>
+</robot>

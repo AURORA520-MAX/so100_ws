@@ -1,0 +1,15 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Displays:
+    - Class: rviz_default_plugins/RobotModel
+      Name: RobotModel
+      Enabled: true
+      Description Topic:
+        Depth: 5
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        Value: /robot_description
+  Global Options:
+    Fixed Frame: base_link
