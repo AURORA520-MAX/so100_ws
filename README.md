@@ -79,6 +79,14 @@ ros2 topic pub /joint_commands std_msgs/Float64MultiArray \
 | `so-arm100-level3-moveit2-success.md` | MoveIt2 部署完整记录 |
 | `so-arm100-commands.md` | 命令速查手册 |
 
+## 待实现
+
+- [ ] Level 4：视觉感知（USB 摄像头 + AprilTag/YOLO 物体检测）
+- [ ] Level 5：智能抓取（视觉定位 → MoveIt2 规划 → 夹爪执行）
+- [ ] 上位机 GUI 控制面板（Web/桌面端）
+- [ ] 轨迹录制与回放
+- [ ] 多舵机同步速度优化
+
 ## 许可证
 
 MIT
