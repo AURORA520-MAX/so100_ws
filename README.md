@@ -1,0 +1,84 @@
+# SO-ARM100 六自由度机械臂 ROS2 工作空间
+
+> 3D 打印机械臂 + STM32 舵机桥接 + ROS2 Humble 驱动 + MoveIt2 运动规划
+
+## 硬件架构
+
+```
+Intel NUC (ROS2 Humble)
+    │
+    ├── USB → CP2102 → STM32F103C8T6 → Yeahbot → LX-16A 舵机 ×6
+    │                              ↑
+    │                    下位机固件（协议转换）
+    │                    0x55 0x55 多舵机帧 → 单舵机帧
+```
+
+下位机固件仓库：[stm32_servo_bridge](https://github.com/AURORA520-MAX/stm32_servo_bridge)
+
+## 工作空间结构
+
+```
+so100_ws/src/
+├── so100_arm_driver/       # ROS2 驱动节点
+│   ├── servo_driver.py           # 串口驱动 + FollowJointTrajectory Action
+│   ├── repeat_motion.py          # 重复动作演示
+│   └── launch/                   # 启动文件
+├── so100_description/      # URDF 模型描述
+│   ├── urdf/so100.urdf           # SO-ARM100 完整 URDF
+│   └── meshes/                   # STL 网格模型
+└── so100_moveit_config/    # MoveIt2 运动规划配置
+    ├── config/                    # SRDF/kinematics/ompl/joint_limits
+    └── launch/                    # move_group 启动文件
+```
+
+## 环境要求
+
+| 项目 | 版本 |
+|------|------|
+| OS | Ubuntu 22.04 |
+| ROS2 | Humble |
+| MoveIt2 | 2.5.9 (apt) |
+| Python | 3.10 |
+
+## 编译
+
+```bash
+cd ~/so100_ws
+source /opt/ros/humble/setup.bash
+colcon build
+source install/setup.bash
+```
+
+## 启动
+
+```bash
+# 基础驱动 + RViz 显示
+ros2 launch so100_arm_driver so100_bringup.launch.py
+
+# 完整 MoveIt2 运动规划
+ros2 launch so100_moveit_config move_group.launch.py
+
+# 重复动作演示
+ros2 run so100_arm_driver repeat_motion
+```
+
+## 关节控制
+
+```bash
+# 归中
+ros2 topic pub /joint_commands std_msgs/Float64MultiArray \
+  "{data: [120.0, 120.0, 120.0, 120.0, 60.0, 60.0]}" --once
+```
+
+## 相关文档
+
+| 文档 | 内容 |
+|------|------|
+| `SO-ARM100_ROS2_完整实施手册.md` | Level 0~3 完整教程 |
+| `so-arm100-servo-bridge.md` | 4 种舵机通信方案 |
+| `so-arm100-level3-moveit2-success.md` | MoveIt2 部署完整记录 |
+| `so-arm100-commands.md` | 命令速查手册 |
+
+## 许可证
+
+MIT
