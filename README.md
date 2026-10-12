@@ -102,7 +102,7 @@ ros2 launch so100_arm_driver so100_bringup.launch.py
 ros2 run so100_arm_driver repeat_motion
 ```
 
-[![机械臂重复运动演示](media/repeat_motion_poster.jpg)](media/repeat_motion.mp4)
+![机械臂重复运动演示](media/repeat_motion.gif)
 
 ### 功能 2：运动规划
 
@@ -110,7 +110,7 @@ ros2 run so100_arm_driver repeat_motion
 ros2 launch so100_moveit_config move_group.launch.py
 ```
 
-[![运动规划演示](media/motion_planning_poster.jpg)](media/motion_planning.mp4)
+![运动规划演示](media/motion_planning.gif)
 
 ### RVIZ2 鼠标视野操作
 
