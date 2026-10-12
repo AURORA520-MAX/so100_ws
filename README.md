@@ -70,6 +70,56 @@ ros2 topic pub /joint_commands std_msgs/Float64MultiArray \
   "{data: [120.0, 120.0, 120.0, 120.0, 60.0, 60.0]}" --once
 ```
 
+## 功能演示
+
+### 系统登录
+
+系统密码：`ros2`
+
+### 上电基础准备
+
+1. 打开终端，执行设备查询命令：
+
+   ```bash
+   ls /dev/ttyUSB*
+   ```
+
+   确认输出为 `/dev/ttyUSB0`（若不是，插拔 USB 转 TTL 模块后重新执行，直到确认为 `/dev/ttyUSB0`）。
+
+2. 执行设备权限配置命令：
+
+   ```bash
+   sudo chmod 666 /dev/ttyUSB0
+   ```
+
+### 功能 1：机械臂重复运动
+
+```bash
+# 终端 1
+ros2 launch so100_arm_driver so100_bringup.launch.py
+
+# 终端 2
+ros2 run so100_arm_driver repeat_motion
+```
+
+[![机械臂重复运动演示](media/repeat_motion_poster.jpg)](media/repeat_motion.mp4)
+
+### 功能 2：运动规划
+
+```bash
+ros2 launch so100_moveit_config move_group.launch.py
+```
+
+[![运动规划演示](media/motion_planning_poster.jpg)](media/motion_planning.mp4)
+
+### RVIZ2 鼠标视野操作
+
+| 操作 | 效果 |
+|------|------|
+| 鼠标左键按住拖动 | 旋转三维视角，全方位查看机械臂模型及运动场景 |
+| 鼠标滚轮滚动 | 放大 / 缩小视野，拉近或拉远场景 |
+| 鼠标右键按住拖动 | 平移整个视野，调整画面显示位置 |
+
 ## 相关文档
 
 | 文档 | 内容 |
